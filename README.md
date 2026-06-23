@@ -4,7 +4,7 @@
 
 This project was developed as part of practical learning and hands-on implementation under the guidance and support of:
 
-**School of Technology**
+**Coding Block School of Technology**
 
 **Instructor:** Aryeesh Sir
 
