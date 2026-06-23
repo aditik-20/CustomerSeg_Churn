@@ -1,4 +1,17 @@
-````md
+
+
+## Training and Guidance
+
+This project was developed as part of practical learning and hands-on implementation under the guidance and support of:
+
+**School of Technology**
+
+**Instructor:** Aryeesh Sir
+
+The project involved understanding customer churn prediction concepts, data preprocessing techniques, exploratory data analysis, handling imbalanced datasets using SMOTE, and implementing multiple machine learning models for prediction and comparison.
+
+
+
 # Customer Churn Prediction using Machine Learning
 
 ## Project Overview
