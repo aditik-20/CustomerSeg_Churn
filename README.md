@@ -12,35 +12,44 @@ The project involved understanding customer churn prediction concepts, data prep
 
 
 
-# Customer Churn Prediction using Machine Learning
+
+# Customer Segmentation and Churn Prediction using Machine Learning
 
 ## Project Overview
 
-Customer churn prediction is the process of identifying customers who are likely to discontinue a company's services. Customer retention is important because acquiring a new customer generally costs more than retaining existing customers.
+Customer churn prediction is the process of identifying customers who are likely to discontinue a company's services. Customer retention is critical because acquiring new customers generally costs more than retaining existing customers.
 
-This project analyzes customer behavior and predicts customer churn using Machine Learning techniques on a telecom customer dataset.
+This project focuses on analyzing telecom customer behavior, segmenting customers based on their characteristics, and predicting customer churn using multiple Machine Learning techniques.
 
 The project includes:
 
 - Exploratory Data Analysis (EDA)
-- Data preprocessing
-- Handling class imbalance using SMOTE
-- Multiple Machine Learning models
-- Model comparison and evaluation
+- Data Cleaning and Preprocessing
+- Customer Segmentation using K-Means Clustering
+- Handling Imbalanced Data using SMOTE
+- Multiple Machine Learning Models
+- Hyperparameter Tuning
+- Model Evaluation and Comparison
 
 ---
 
 ## Problem Statement
 
-Telecom companies often lose customers due to competition, pricing issues, customer dissatisfaction, or service-related problems.
+Telecom companies often face customer loss because of competition, pricing issues, poor service quality, or customer dissatisfaction.
 
-The objective of this project is to build a machine learning model that predicts whether a customer is likely to churn based on customer behavior and service-related features.
+The objective of this project is to:
+
+- Analyze customer behavior patterns
+- Segment customers into different groups
+- Predict customers likely to churn
+- Identify important factors affecting churn
+- Provide insights for improving customer retention
 
 ---
 
 ## Dataset Information
 
-Dataset: Telco Customer Churn Dataset
+**Dataset:** Telco Customer Churn Dataset
 
 ### Dataset Statistics
 
@@ -48,7 +57,7 @@ Dataset: Telco Customer Churn Dataset
 - Total Features: 33
 - Target Variable: `Churn Value`
 
-### Target Classes
+### Target Variable
 
 - `0` → Customer stays
 - `1` → Customer churns
@@ -61,14 +70,27 @@ Dataset: Telco Customer Churn Dataset
 - Dependents
 - Tenure Months
 - Phone Service
+- Multiple Lines
 - Internet Service
 - Online Security
 - Online Backup
+- Device Protection
 - Tech Support
-- Contract
+- Streaming Services
+- Contract Type
 - Payment Method
 - Monthly Charges
 - Total Charges
+
+---
+
+## Training and Guidance
+
+This project was developed as part of practical learning and implementation under:
+
+**School of Technology**
+
+**Instructor:** Aryeesh Sir
 
 ---
 
@@ -83,60 +105,80 @@ The following analyses were performed:
 - Payment Method vs Churn
 - Tech Support vs Churn
 - Correlation Heatmap
-- Histograms and Boxplots
+- Histograms
+- Boxplots
 
 ### Key Findings
 
 - Customers with month-to-month contracts have higher churn rates.
 - Customers with lower tenure are more likely to churn.
-- Customers with higher monthly charges tend to churn more frequently.
-- Customers without technical support show higher churn probability.
+- Higher monthly charges increase churn probability.
+- Customers without technical support have greater churn risk.
 
 ---
 
 ## Data Preprocessing
 
-Steps performed during preprocessing:
+The following preprocessing steps were performed:
 
-1. Converted `Total Charges` from object datatype to numeric datatype.
-2. Handled missing values using median imputation.
-3. Removed unnecessary columns:
-   - CustomerID
-   - Count
-   - Country
-   - State
-   - Zip Code
-   - Latitude
-   - Longitude
-   - Churn Label
-   - Churn Score
-   - CLTV
-   - Churn Reason
+### Data Cleaning
 
-4. Applied One-Hot Encoding using:
+- Converted `Total Charges` from object datatype to numeric datatype
+- Handled missing values using median imputation
+
+### Removed Unnecessary Features
+
+- CustomerID
+- Count
+- Country
+- State
+- Zip Code
+- Latitude
+- Longitude
+- Churn Label
+- Churn Score
+- CLTV
+- Churn Reason
+
+### Feature Engineering
+
+Applied One-Hot Encoding:
 
 ```python
 pd.get_dummies(drop_first=True)
 ````
 
-5. Split data into training and testing datasets.
+### Data Split
+
+Dataset was divided into:
+
+* Training Data: 80%
+* Testing Data: 20%
 
 ---
 
-## Handling Imbalanced Dataset
+## Handling Imbalanced Data
 
 The dataset showed class imbalance:
 
 * Non-Churn Customers: 73.46%
 * Churn Customers: 26.54%
 
-SMOTE (Synthetic Minority Oversampling Technique) was applied to balance classes.
+To address this issue:
+
+**SMOTE (Synthetic Minority Oversampling Technique)** was applied.
+
+Benefits:
+
+* Balanced minority class samples
+* Improved model performance
+* Reduced prediction bias
 
 ---
 
-## Machine Learning Models Used
+## Machine Learning Models Implemented
 
-The following models were implemented:
+The following models were trained and compared:
 
 1. Logistic Regression
 2. Decision Tree
@@ -145,6 +187,53 @@ The following models were implemented:
 5. Support Vector Machine (SVM)
 6. Gradient Boosting
 7. XGBoost
+8. Balanced Random Forest
+
+---
+
+## Hyperparameter Tuning
+
+Hyperparameter tuning was performed using:
+
+**GridSearchCV**
+
+Parameters tuned:
+
+* Number of estimators
+* Maximum tree depth
+
+Purpose:
+
+* Improve model accuracy
+* Optimize model performance
+
+---
+
+## Customer Segmentation
+
+Customer segmentation was implemented using:
+
+**K-Means Clustering**
+
+Steps performed:
+
+1. Selected important customer attributes:
+
+   * Tenure Months
+   * Monthly Charges
+   * Total Charges
+
+2. Applied Standard Scaling
+
+3. Used Elbow Method to determine optimal clusters
+
+4. Created customer segments
+
+Benefits:
+
+* Understand customer groups
+* Identify high-value customers
+* Improve retention strategies
 
 ---
 
@@ -157,31 +246,20 @@ Models were evaluated using:
 * Recall
 * F1 Score
 * Confusion Matrix
-
----
-
-## Results
-
-Random Forest showed the best overall performance.
-
-### Random Forest Performance
-
-* Accuracy: ~78.6%
-* Precision: ~0.63
-* Recall: ~0.61
-* F1-score: ~0.62
+* ROC Curve
+* AUC Score
 
 ---
 
 ## Feature Importance
 
-Important factors affecting customer churn:
+Major features influencing churn:
 
 * Total Charges
 * Tenure Months
 * Monthly Charges
 * Contract Type
-* Internet Service Type
+* Internet Service
 * Payment Method
 * Tech Support
 * Paperless Billing
@@ -206,7 +284,7 @@ Important factors affecting customer churn:
 * Imbalanced-Learn (SMOTE)
 * XGBoost
 
-### Environment
+### Development Environment
 
 * Google Colab
 
@@ -228,31 +306,47 @@ Train-Test Split
 ↓
 SMOTE for Class Balancing
 ↓
+Feature Scaling
+↓
 Model Training
 ↓
-Model Evaluation
+Hyperparameter Tuning
 ↓
-Prediction and Insights
+Model Comparison
+↓
+ROC Curve Evaluation
+↓
+Customer Segmentation using K-Means
+↓
+Prediction and Business Insights
 
 ---
 
 ## Conclusion
 
-This project successfully analyzed customer behavior and predicted customer churn using machine learning techniques.
+This project successfully analyzed telecom customer behavior, segmented customers into groups, and predicted customer churn using Machine Learning techniques.
 
-The results indicate that factors such as customer tenure, monthly charges, contract type, and technical support strongly influence customer churn behavior.
+The analysis indicated that factors such as:
 
-These predictive insights can help telecom companies identify customers likely to leave and improve customer retention strategies.
+* Customer tenure
+* Monthly charges
+* Contract type
+* Technical support availability
+* Internet services
+
+strongly affect customer churn behavior.
+
+Machine Learning can help telecom companies identify customers likely to leave and support effective retention strategies.
 
 ---
 
 ## Future Enhancements
 
-* Hyperparameter tuning
-* Deep Learning implementation
-* Real-time prediction dashboard
+* Deep Learning Implementation
+* Real-Time Prediction Dashboard
 * Deployment using Flask or Streamlit
-* Customer retention recommendation system
+* Recommendation System for Customer Retention
+* Live Customer Monitoring System
 
 ```
 ```
